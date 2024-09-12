@@ -14,18 +14,18 @@ newGameButton.addEventListener('click', function(){
     inputElem.disabled = false;
     inputElem.value = "";
     inputElem.focus();
-    errorElem.visibility = 'hidden';
+    errorElem.style.visibility = 'hidden';
     streakElem.innerHTML = "";
 
 });
 
-document.getElementById('form').addEventListener('submit', function (event){
+document.getElementById('form').addEventListener('submit',async function (event){
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const word = formData.get('word');
 
-    const isWordValid = game.validateword(word);
+    const isWordValid = await game.validateword(word.toLocaleLowerCase());
     if(isWordValid){
         streakElem.innerHTML = game.streak;
         errorElem.style.visibility = "hidden";
